@@ -1,6 +1,6 @@
 use core::f32::consts::PI;
 
-use bevy::{light::light_consts::lux::FULL_DAYLIGHT, prelude::*};
+use bevy::{light::{light_consts::lux::FULL_DAYLIGHT, NotShadowCaster}, prelude::*};
 
 #[derive(Component)]
 pub(crate) struct SkyboxPlane {
@@ -44,6 +44,7 @@ pub(crate) fn init_skybox_mesh<M: Material>(
     // negative x
     commands.spawn((
         Mesh3d(mesh.clone()),
+        NotShadowCaster,
         standard_materials.nx,
         Transform::from_translation(Vec3::new(-box_size, 0.0, 0.0))
             .with_rotation(Quat::from_rotation_z(-PI * 0.5) * Quat::from_rotation_y(PI * 0.5)),
@@ -55,6 +56,7 @@ pub(crate) fn init_skybox_mesh<M: Material>(
     // negative y
     commands.spawn((
         Mesh3d(mesh.clone()),
+        NotShadowCaster,
         standard_materials.ny,
         Transform::from_translation(Vec3::new(0.0, -box_size, 0.0)),
         SkyboxPlane {
@@ -65,6 +67,7 @@ pub(crate) fn init_skybox_mesh<M: Material>(
     // negative z
     commands.spawn((
         Mesh3d(mesh.clone()),
+        NotShadowCaster,
         standard_materials.nz,
         Transform::from_translation(Vec3::new(0.0, 0.0, -box_size))
             .with_rotation(Quat::from_rotation_x(PI * 0.5)),
@@ -76,6 +79,7 @@ pub(crate) fn init_skybox_mesh<M: Material>(
     // positive x
     commands.spawn((
         Mesh3d(mesh.clone()),
+        NotShadowCaster,
         standard_materials.px,
         Transform::from_translation(Vec3::new(box_size, 0.0, 0.0))
             .with_rotation(Quat::from_rotation_z(PI * 0.5) * Quat::from_rotation_y(-PI * 0.5)),
@@ -87,6 +91,7 @@ pub(crate) fn init_skybox_mesh<M: Material>(
     // positive y
     commands.spawn((
         Mesh3d(mesh.clone()),
+        NotShadowCaster,
         standard_materials.py,
         Transform::from_translation(Vec3::new(0.0, box_size, 0.0))
             .with_rotation(Quat::from_rotation_z(PI) * Quat::from_rotation_y(PI)),
@@ -98,6 +103,7 @@ pub(crate) fn init_skybox_mesh<M: Material>(
     // positive z
     commands.spawn((
         Mesh3d(mesh.clone()),
+        NotShadowCaster,
         standard_materials.pz,
         Transform::from_translation(Vec3::new(0.0, 0.0, box_size))
             .with_rotation(Quat::from_rotation_x(-PI * 0.5) * Quat::from_rotation_y(PI)),
